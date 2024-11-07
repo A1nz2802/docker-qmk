@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  qmk:
+    container_name: qmk
+    privileged: true
+    build: 
+      context: .
+      args:
+        KEYBOARD: ${KEYBOARD}
+        KEYMAP: ${KEYMAP}
+    volumes:
+      - ./keymap:/root/qmk_firmware/keyboards/${KEYBOARD}/keymaps/${KEYMAP}
+      - /dev:/dev
+    environment:
+      - KEYBOARD=${KEYBOARD}
+      - KEYMAP=${KEYMAP}
